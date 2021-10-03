@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="College_model.js"></script>
+    <title>CollegeVichar</title>
+</head>
+<style>
+    .grid{
+        position: relative;
+        /* top: 5%; */
+        left: 7%;
+        zoom:0.5;
+        float: left;
+        /* margin: 0; */
+    }
+    .box {
+            position:relative;  
+            display: flex;
+            align-items:center;
+            /* zoom: 0.5; */
+        } 
+    .header{
+        overflow: hidden;
+        padding-top:1%;
+        box-shadow: 1px 1px 4px grey;
+        }
+    .navigation_bar{
+        position: relative;
+        padding-top: 2.2%;  
+        width:50%;
+        animation: loadAnimation2 2s;
+        animation-delay: 5s;
+        animation-fill-mode: forwards;
+        float: left;
+    }
+    .row{
+        padding-top: 1%;
+        width:100%;  
+    }
+    .card{
+        box-shadow: 1px 1px 4px grey;
+    }
+    .required:after{
+        content:" *";
+        color:red;
+    }
+    .requirements {
+      /* padding: 0 30px 0 50px;
+      color: #999; */
+      /* max-height: 10px; */
+      /* transition: 0.28s;
+      overflow: hidden;
+      font-style: italic; */
+      color:red;
+    }
+    .validation_check{
+        height:20px;
+        position: absolute;
+        width: auto;
+        bottom: 40%;
+        right: 8%;
+        /* margin-top: 0; */
+    }
+    .svg{
+        fill:green;
+    }
+    .card_text{
+        text-align: center;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-weight: bold;
+    }
+    .college_find_text{
+        text-align: center;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-weight: bold;
+        color:green;
+    }
+    .card_subtext{
+        text-align: center;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-weight: bold;
+        color:grey;
+    }
+    .submit{
+        text-align:center;
+    }
+    #College_submit{
+        background-color:darkorange;
+        color:white;
+        font-weight: bold;
+        /* text-align:center; */
+    }
+    .instructions_part{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .instruction{
+        margin: auto;
+        text-align:left;
+        font-weight: bold;
+    }
+    ol li{
+      padding-bottom:1vh;  
+      /* padding-right:0; */
+    }
+    footer {
+        box-shadow: 1px 1px 4px grey;
+        }
+    #college_cards{
+        margin:3%;
+        padding:3%;
+    }
+    .information_icon{
+            height:3vh;
+            width:auto;
+    } 
+    @media screen and (max-width: 768px) {
+        .row{
+            /* padding-left:3vw; */
+            /* left:10px; */
+            margin:0;
+        }
+        #card_form{
+            position:relative;  
+            display: flex;
+            align-items:center;
+        }
+        h1{
+            text-align:center;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            text-align: center;
+            font-weight:bold;
+            zoom:0.7;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 2px 2px 6px rgba(1, 1, 1, 0.4);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            }
+
+            .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            }
+
+            .sidebar a:hover {
+            color: #f1f1f1;
+            }
+
+            .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            }
+            .navbar_icon{
+            zoom:0.4;
+            padding-left:10%;
+            padding-top:10%; 
+            }
+            .phone_menu{
+                position: relative;
+                zoom:1.8;
+                left:-7%;
+            }
+            .box{
+                zoom:0.8;
+                padding-top:3%;
+            }
+            .navbar{
+                display:none;
+            }
+            .box_nav{
+                position:relative;  
+                display: flex;
+                align-items:center;
+            }
+            .webname_nav{
+                zoom:1.6;
+            }
+            #college_cards{
+            text-align:center;
+        }
+        .college_find_text{
+            zoom:0.5;
+        }
+    
+    }
+    @media screen and (min-width: 768px) {
+        #card_form{
+            padding-left:2vw;
+        }
+        #mySidebar,#phone_menu_button{
+            display:none;
+        }
+    }
+</style>
+<body>
+    <div class="header">
+        <!-- <button class = "phone_menu" id="phone_menu_button" style="border: 0; background: transparent" onclick="openNav()">
+            <img src="resources/menu-outline.svg" width="90" height="50" alt="submit" />
+        </button> -->
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <div class="navbar_icon">    
+                <div class="box_nav">
+                    <img class= "start" src="resources/college-degree.png" alt="College_icon">
+                    <h1 class="webname_nav">CollegeVichar</h1>
+                </div>
+            </div>
+            <a href="home.html">Home</a>
+            <a href="findcolleges.html">Find Colleges</a>
+            <a href="#">Updates</a>
+            <a href="#">Login</a>
+        </div>
+        <div class="grid col-md-8">    
+            <div class="box">
+                <button class = "phone_menu" id="phone_menu_button" style="border: 0; background: transparent" onclick="openNav()">
+                    <img src="resources/menu-outline.svg" width="90" height="50" alt="submit" />
+                </button>
+                <img class= "start" src="resources/college-degree.png" alt="College_icon">
+                <h1 class="webname">CollegeVichar</h1>
+            </div>
+        </div>
+        <div class="navigation_bar col-md-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent ml-auto">
+                <!-- <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button> -->
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>    
+                        <li class="nav-item active px-3">
+                            <a class="nav-link" href="findcolleges.html">Find Colleges <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="#">Updates</a>
+                        </li>
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>      
+    </div>
+    <div class="row">
+        <div style="padding-top: 5vh;padding-bottom:5vh" id="card_form" class="col-12 col-md-4">
+            <div class="card">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                    <h4 class="card_text">Search the college you desire</h4>
+                    <h6 class="card_subtext">Fill these details and search for the college that fits your needs</h6>
+                    <form class="College_Search_Form">
+                        <div class="form-group">
+                            <label class="required">College Name</label>
+                            <select class="form-control" id="College_Name_Menu" required>
+                              <option value="" selected disabled>SELECT..</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Caste</label>
+                            <select class="form-control" id="Caste_Menu">
+                                <option value="" selected disabled>SELECT..</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Annual Family Income</label>
+                            <input type="number" class="form-control" id="Family_Income" required="true">
+                            <div class="requirements"></div>
+                            <!-- <img class="validation_check" src="resources/check.svg"> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="required">12th Standard Percentage</label>
+                            <input type="number" min="0" max="100" class="form-control" id="12th_Standard_Percentage" required="true">
+                            <div class="requirements"></div>
+                        </div>
+                        <div class="submit">
+                            <button type="button" id="College_submit" onclick="Filter_College_Data()" disabled class="btn">Find</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 instructions_part" id="result_section">
+            <div class="instruction" id="instruction">   
+                <h1>How does it work?</h1>
+                <ol style="display: inline-block;color:grey;margin: 0;">
+                    <li class="">
+                        Fill all the required details asked in the form and click on the find button
+                    </li>    
+                    <li class="">
+                        Once the list of colleges shows up, click on each of the college that satisfies your needs to get more details of the same.
+                    </li>
+                    <li class="">
+                        Under each college card, details of application and financial data is available after clicking the card
+                    </li>
+                    <li class="">
+                        Click on star button to favourite your dream college for easier access.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <section
+          class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <div class="d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+          </div>
+          <div>
+            <a href="" class="text-reset">
+                <i class="fab fa-twitter"></i>
+                <img style="width:30px;height:30px;margin-right:12px;" src="resources/twitter.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+                <i class="fab fa-instagram"></i>
+                <img style="width:24px;height:24px;margin-right:10px;" src="resources/instagram.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+                <i class="fab fa-linkedin"></i>
+                <img style="width:40px;height:40px;margin-right:10px;" src="resources/linkedin.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+              <i class="fab fa-github"></i>
+              <img style="width:27px;height:27px;margin-right:10px;" src="resources/github.png" alt="College_Graduation">
+            </a>
+          </div>
+        </section>
+
+        <section class="">
+          <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                <h6 class="text-uppercase fw-bold">
+                  College Vichar
+                </h6>
+                <p>
+                  Find the perfect college for your career
+                </p>
+              </div>
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Contact
+                </h6>
+                <p>
+                  info@example.com
+                </p>
+                <p>+ 01 234 567 88</p>
+              </div>
+            </div>
+            <!-- Grid row -->
+          </div>
+        </section>
+        <!-- Section: Links  -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2021 Copyright:
+          <a class="text-reset fw-bold" href="home.html">CollegeVichar.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+    <script>
+        // console.log(College_Data);
+        var College_Name_Array = [];
+        for(var i=0;i<College_Data.length;i++){
+            var value = College_Data[i];
+            if(College_Name_Array.includes(value.College_Name)){
+                // console.log("True")
+                continue;
+            }
+            else{
+                // console.log(value.College_Name);
+                var college_name = document.getElementById("College_Name_Menu")
+                college_name.innerHTML += "<option>"+ value.College_Name +"</option>"
+                $(college_name).on('change',function(){
+                    college_name.classList.add("is-valid")
+                });
+                // college_name.classList.add("is-valid")
+                College_Name_Array.push(value.College_Name)
+            }
+        }
+        $("#College_Name_Menu").on('change',function(){ //add a change event handler to gender select
+            var value=$(this).val(); //get its selected value
+            // console.log(value)
+            result = "";
+            var College_Name_Caste = [];
+            for(var i=0;i<College_Data.length;i++){
+                if(College_Data[i].College_Name === (value) && !College_Name_Caste.includes(College_Data[i].Caste)){
+                    // console.log("True")
+                    College_Name_Caste.push(College_Data[i].Caste);
+                    result+="<option>"+College_Data[i].Caste+"</option>"
+                }
+                else{
+                    continue;
+                }
+            }
+            var college_caste = document.getElementById("Caste_Menu")
+            college_caste.classList.add("is-valid")
+            college_caste.innerHTML = result;
+        });
+        function validate(){
+            var formdata  = document.getElementsByClassName("College_Search_Form")
+            var This_id = $(this);
+            // console.log(This_id);s
+            // console.log(formdata[0].checkValidity())
+            if(formdata[0].checkValidity()){
+                document.getElementById('College_submit').removeAttribute("disabled");
+            }  
+            else{
+                document.getElementById('College_submit').disabled = true
+            }
+            let value = (This_id[0].checkValidity())? "":This_id[0].validationMessage;
+            let classname = (This_id[0].checkValidity())? "is-valid":"is-invalid";
+            let removename = (!This_id[0].checkValidity())? "is-valid":"is-invalid";
+            This_id.siblings("div")[0].innerHTML = value;
+            This_id[0].classList.remove(removename)
+            This_id[0].classList.add(classname);
+        }
+        function Filter_College_Data(){
+            var CollegeArray = [];
+            var name = document.getElementById("College_Name_Menu").value
+            var caste = document.getElementById("Caste_Menu").value 
+            var income = document.getElementById("Family_Income").value
+            var percent = document.getElementById("12th_Standard_Percentage").value
+            console.log("Hi")
+            if(document.getElementById("output_display")){
+                document.getElementById("output_display").remove();
+                console.log("new element")
+            }
+            var size = window.matchMedia( "(max-width: 768px)" );
+            var college_card = '<div id="output_display"><h3 class = "college_find_text">Congrats, these are the colleges available as per your requirements</h3>'
+            for(var i=0;i<College_Data.length;i++){
+                var value = College_Data[i]; 
+                // console.log(value)
+                if(value.College_Name == name && value.Caste == caste && 0.7*parseInt(value.Annual_Fee)<=income){
+                    if (size.matches) {
+                        college_card +='<div class="card" id="college_cards"><div class="card-header border-0"><img style = "max-width:100%;max-height:100%;" src="resources/'+value.College_Name+'.jpeg" alt="'+value.College_Name+'"></div><div class="card-block px-2"><h2 style = "font-weight:bold;" class="card_title">'+value.College_Name+'</h2><p style="zoom:1.4;" class="card-text">Course : '+ value.Course + '</p><p style="zoom:1.4;" class="card-text">Fees : '+ value.Annual_Fee + '</p><div style="text-align:center;"><a href="#" style="margin:10px;" class="btn" id="College_submit">Wishlist</a><a href="#" style="margin:10px;" class="btn" id="College_submit">Apply</a></div></div><div style = "margin-left: auto; margin-right: 0;"><img class="information_icon" src="resources/information_icon.png" alt="information_icon"></div></div>';
+                    }
+                    else {
+                        college_card +='<div class="card flex-row flex-wrap" id="college_cards"><div class="card-header border-0"><img style = "max-height:20vh;max-width:auto;" src="resources/'+value.College_Name+'.jpeg" alt="'+value.College_Name+'"></div><div class="card-block px-2"><h2 style = "font-weight:bold;" class="card_title">'+value.College_Name+'</h2><p style="zoom:1.4;" class="card-text">Course : '+ value.Course + '</p><p style="zoom:1.4;" class="card-text">Fees : '+ value.Annual_Fee + '</p><div style="text-align:center;"><a href="#" style="margin:10px;" class="btn" id="College_submit">Wishlist</a><a href="#" style="margin:10px;" class="btn" id="College_submit">Apply</a></div></div><div style = "margin-left: auto; margin-right: 0;"><img class="information_icon" src="resources/information_icon.png" alt="information_icon"></div></div>';
+                    }
+                    CollegeArray.push(value)
+                    console.log(value)
+                }
+            }
+            console.log(CollegeArray)
+            // if(CollegeArray.length){
+            //     documzoom:0.3ent.getElementById("instruction").style.display ="none";
+            //     var result_section = document.getElementById("result_section");
+            //     result_section.classList.remove('instructions_part');
+            //     result_section.innerHTML += college_card
+            // }
+            if(CollegeArray.length == 0){
+                var college_card = '<div id="output_display"><h3 class="college_find_text">These are the scholarships available for colleges of your preferences</h3>'
+                for(var i=0;i<College_Data.length;i++){
+                    var value = College_Data[i]; 
+                    // console.log(value)
+                    if(value.Caste == caste && parseInt(value.Scholarship_Marks)<=percent){
+                        if (size.matches) {
+                            college_card +='<div class="card" id="college_cards"><div class="card-header border-0"><img style = "max-width:100%;max-height:100%;" src="resources/'+value.College_Name+'.jpeg" alt="'+value.College_Name+'"></div><div class="card-block px-2"><h2 style = "font-weight:bold;" class="card_title">'+value.College_Name+'</h2><p style="zoom:1.4;" class="card-text">Course : '+ value.Course + '</p><p style="zoom:1.4;" class="card-text">Fees : '+ value.Annual_Fee + '</p><div style="text-align:center;"><a href="#" style="margin:10px;" class="btn" id="College_submit">Wishlist</a><a href="#" style="margin:10px;" class="btn" id="College_submit">Apply</a></div></div><div style = "margin-left: auto; margin-right: 0;"><img class="information_icon" src="resources/information_icon.png" alt="information_icon"></div></div>';
+                        }
+                        else {
+                            college_card +='<div class="card flex-row flex-wrap" id="college_cards"><div class="card-header border-0"><img style = "max-height:20vh;max-width:auto;" src="resources/'+value.College_Name+'.jpeg" alt="'+value.College_Name+'"></div><div class="card-block px-2"><h2 style = "font-weight:bold;" class="card_title">'+value.College_Name+'</h2><p style="zoom:1.4;" class="card-text">Course : '+ value.Course + '</p><p style="zoom:1.4;" class="card-text">Fees : '+ value.Annual_Fee + '</p><div style="text-align:center;"><a href="#" style="margin:10px;" class="btn" id="College_submit">Wishlist</a><a href="#" style="margin:10px;" class="btn" id="College_submit">Apply</a></div></div><div style = "margin-left: auto; margin-right: 0;"><img class="information_icon" src="resources/information_icon.png" alt="information_icon"></div></div>';
+                        }
+                        CollegeArray.push(value)
+                    }
+                }
+                console.log(CollegeArray)
+            }
+            college_card+='</div>'
+            document.getElementById("instruction").style.display ="none";
+            var result_section = document.getElementById("result_section");
+            result_section.classList.remove('instructions_part');
+            result_section.innerHTML += college_card
+        }
+        $(".form-control").keyup(validate);
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "70%";
+            document.getElementById("phone_menu_button").style.visibility = "hidden";
+            //document.getElementById("main").style.marginLeft = "250px";
+            }
+            
+            function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("phone_menu_button").style.visibility = "visible";
+            // document.getElementById("main").style.marginLeft= "0";
+            }
+    </script>
+</body>
+</html>

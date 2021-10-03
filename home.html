@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>CollegeVichar</title>
+</head>
+<style>
+    @media screen and (max-width: 768px) {
+        .grid{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            zoom: 0.3;
+            transform: translate(-20%,-50%);
+            animation: loadAnimationSmall 2s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+        }
+        .box {
+            position:relative;  
+            display: flex;
+            align-items:center;
+            /* zoom: 0.5; */
+        } 
+        .intro_text{
+            color:darkorange;
+            font-weight: 1000;
+            padding-top: 5vh;
+            padding-bottom:2vh;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 16px;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; */
+            /* fill-opacity: 1.0; */
+        }
+        .introduction_text{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            text-align: center;
+            transform: translate(-50%,-50%);
+            animation: loadAnimation3 2s;
+            animation-delay: 6s;
+            animation-fill-mode: forwards;
+        }
+        .btn{
+            background-color:#66c2ff;
+            color:white;
+            border-radius: 10%;
+        }
+        .btn:hover{
+            background-color:darkorange;
+        }
+        .navigation_bar{
+            display: none;
+        }
+        .phone_menu{
+            zoom:0.8;
+            position: absolute;
+            top: 7%;
+            animation: loadAnimation3 2s;
+            animation-delay: 6s;
+            animation-fill-mode: forwards;
+            /* left: 3%; */
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            text-align: center;
+            font-weight:bold;
+            zoom:0.7;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 2px 2px 6px rgba(1, 1, 1, 0.4);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            }
+
+            .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            }
+
+            .sidebar a:hover {
+            color: #f1f1f1;
+            }
+
+            .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            }
+            .navbar_icon{
+            zoom:0.4;
+            padding-left:10%;
+            padding-top:10%; 
+            }
+            .intro_text_2{
+            text-align:center;
+            color:#66c2ff;
+            font-weight: 1000;
+            padding-top: 10vh;
+            padding-bottom:4vh;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; */
+        }
+
+        .intro_text_3{
+            text-align:center;
+            color:white;
+            font-weight: 1000;
+            padding-top: 10vh;
+            padding-bottom:5vh;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; */
+        }
+            .box_nav{
+                position:relative;  
+                display: flex;
+                align-items:center;
+            }
+            .webname_nav{
+                zoom:1.6;
+            }
+    }
+    @media screen and (min-width: 768px) {
+        .grid{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-20%,-50%);
+            animation: loadAnimation 2s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+        }
+        .box {
+            position:relative;
+            display: flex;
+            align-items:center;
+            /* z-index:2; */
+        }
+        /* .background_image{
+            width: 100%;
+            height:100vh;
+            opacity:0;
+            animation: loadAnimation2 3s;
+            animation-delay: 5s;
+            animation-fill-mode: forwards;
+        } */
+        .navigation_bar{
+            position: absolute;
+            top: 5%;
+            left: 70%;
+            animation: loadAnimation2 2s;
+            animation-delay: 5s;
+            animation-fill-mode: forwards;
+        }
+        .intro_text{
+            color:darkorange;
+            font-weight: 1000;
+            padding-top: 10vh;
+            padding-bottom:5vh;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+            /* fill-opacity: 1.0; */
+        }
+        .intro_text_2{
+            text-align:center;
+            color:#66c2ff;
+            font-weight: 1000;
+            padding-top: 10vh;
+            padding-bottom:4vh;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; */
+        }
+
+        .intro_text_3{
+            text-align:center;
+            color:white;
+            font-weight: 1000;
+            padding-top: 10vh;
+            padding-bottom:5vh;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            /* text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; */
+        }
+        .introduction_text{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            text-align: center;
+            transform: translate(-50%,-50%);
+            animation: loadAnimation3 2s;
+            animation-delay: 6s;
+            animation-fill-mode: forwards;
+        }
+        .btn{
+            font-size: 40px;
+            background-color:#66c2ff;
+            color:white;
+            border-radius: 10%;
+        }
+        .btn:hover{
+            background-color:darkorange;
+        }
+        .phone_menu,.sidebar{
+            display: none;
+        }
+
+    }
+    .background_image{
+            width: 100%;
+            height:100vh;
+            opacity:0;
+            animation: loadAnimation2 2s;
+            animation-delay: 5s;
+            animation-fill-mode: forwards;
+        }
+    /* .Wishlist_Colleges{
+        height:100px;
+    } */
+    .Wishlist_Content {
+            opacity: 0;
+            /* background-image: url("resources/wishlist_image.png"); */
+            background-repeat:no-repeat;
+            background-size:100%;
+            -moz-transition: all 1000ms linear;
+            -webkit-transition: all 1000ms linear;
+            -o-transition: all 1000ms linear;
+            transition: all 1000ms linear;
+            -moz-transform: translate3d(-100px, 0px, 0px);
+            -webkit-transform: translate3d(-100px, 0px, 0px);
+            -o-transform: translate(-100px, 0px);
+            -ms-transform: translate(-100px, 0px);
+            transform: translate3d(-100px, 0px, 0px);
+        }
+
+    .Wishlist_Content.in-view {
+            opacity: 1;
+            -moz-transform: translate3d(0px, 0px, 0px);
+            -webkit-transform: translate3d(0px, 0px, 0px);
+            -o-transform: translate(0px, 0px);
+            -ms-transform: translate(0px, 0px);
+            transform: translate3d(0px, 0px, 0px);
+        }
+
+    .About_Us_Content {
+            opacity: 0;
+            background-image: url("resources/college_about.jpg");
+            background-repeat:no-repeat;
+            background-size:cover;
+            box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+            -moz-transition: all 1000ms linear;
+            -webkit-transition: all 1000ms linear;
+            -o-transition: all 1000ms linear;
+            transition: all 1000ms linear;
+            /* -moz-transform: translate3d(-100px, 0px, 0px);
+            -webkit-transform: translate3d(-100px, 0px, 0px);
+            -o-transform: translate(-100px, 0px);
+            -ms-transform: translate(-100px, 0px);
+            transform: translate3d(-100px, 0px, 0px); */
+        }
+    .About_Us_Colleges{
+        padding-top: 10vh;
+    }
+
+    .About_Us_Content.in-view {
+            opacity: 1;
+            /* -moz-transform: translate3d(0px, 0px, 0px);
+            -webkit-transform: translate3d(0px, 0px, 0px);
+            -o-transform: translate(0px, 0px);
+            -ms-transform: translate(0px, 0px);
+            transform: translate3d(0px, 0px, 0px); */
+        }
+    
+
+
+    @keyframes loadAnimation {
+        0%{
+            transform: translatex(-20%) translatey(-50%);
+        }
+        100%{
+            transform: translatex(-120%) translatey(-200%) scale(0.5);
+        }
+    }
+
+    @keyframes loadAnimationSmall {
+        0%{
+            transform: translatex(-20%px) translatey(-50%);
+        }
+        100%{
+            transform: translatex(-45%) translatey(-150vh);
+        }
+    }
+
+    @keyframes loadAnimation2 {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 0.8;
+        }
+    }
+
+    @keyframes loadAnimation3 {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+
+
+    .find_sections:hover,.wishlist_sections:hover,.apply_sections:hover{
+        transform: scale(1.1);
+        transition-duration: 0.5s;
+    }
+
+
+    .webname{
+        font-size: 60px;
+        animation: loadAnimation2 2s;
+        animation-delay: 3s;
+        animation-fill-mode: forwards;
+    }
+
+</style>
+<body>
+    
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <div class="navbar_icon">    
+            <div class="box_nav">
+                <img class= "start" src="resources/college-degree.png" alt="College_icon">
+                <h1 class="webname_nav">CollegeVichar</h1>
+            </div>
+        </div>
+        <a href="#">Home</a>
+        <a href="findcolleges.html">Find Colleges</a>
+        <a href="#">Updates</a>
+        <a href="#">Login</a>
+    </div>
+    <div class="background">
+        <img class="background_image" src="resources/college_graduation_mobile.jpg" alt="College_Graduation">
+    </div>
+
+    <!-- <button><img class="small_menu" src="resources/menu-outline.svg" alt="Menu"></button> -->
+    <button class = "phone_menu" id="phone_menu_button" style="border: 0; background: transparent;opacity: 0;" onclick="openNav()">
+        <img src="resources/menu-outline.svg" width="90" height="50" alt="submit" />
+    </button>
+
+    <div class="introduction_text" style="opacity: 0;">
+        <h1 class="intro_text">Find your stepping stones to your success</h1>
+        <button type="button" id="explore"  class="btn btn-lg"><strong>Explore</strong></button>
+    </div>
+    <div class="grid">    
+        <div class="box">
+            <img class= "start" src="resources/college-degree.png" alt="College_icon">
+            <h1 class="webname" style="opacity: 0;">CollegeVichar</h1>
+        </div>
+    </div>
+    <div class="navigation_bar" style="opacity: 0;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent ml-auto">
+            <!-- <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active px-3">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="findcolleges.html">Find Colleges</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Updates</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+          </nav>
+    </div>
+    <div class="Wishlist_Colleges">
+        <div class="container Wishlist_Content">
+            <!-- <img class="background_image" src="resources/college_graduation_mobile.jpg" alt="College_Graduation"> -->
+            <h1 class="intro_text_2">Wishlist Your Choices</h1>
+            <p style="text-align:center;color:grey;font-weight:bold;padding-bottom: 1vh;">Find the best colleges you desire and wishlist it for your reference.</p> 
+            <div class="row">
+                <div class="col-12 col-md-4 find_sections" style="text-align:center">
+                    <img src="resources/search.png" style="zoom:0.4" alt="College_Graduation">
+                    <p style="text-align:center;color:grey;font-weight:bold;padding-bottom: 1vh;">Find the colleges that suits your tastes</p> 
+                </div>
+                <div class="col-12 col-md-4 wishlist_sections" style="text-align:center">
+                    <img src="resources/wishlist.png" style="zoom:0.4" alt="College_Graduation">
+                    <p style="text-align:center;color:grey;font-weight:bold;padding-bottom: 1vh;">Wishlist the colleges of your choice.</p> 
+                </div>
+                <div class="col-12 col-md-4 apply_sections"  style="text-align:center">
+                    <img src="resources/apply.png" alt="College_Graduation">
+                    <p style="text-align:center;color:grey;font-weight:bold;padding-bottom: 1vh;">Apply for colleges and pursue your dreams.</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="About_Us_Colleges">
+        <div class="About_Us_Content">
+            <!-- <img class="background_image" src="resources/college_graduation_mobile.jpg" alt="College_Graduation"> -->
+            <h1 class="intro_text_3">About Us</h1>
+            <p style="text-align:center;color:white;font-weight:bold;margin:0;padding-bottom: 5vh;">We are a bunch of developers looking for improvement of college application.<br>Use the site and find the perfect college of your choice.</p> 
+        </div>
+    </div>
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <section
+          class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          <div class="d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
+          </div>
+          <div>
+            <a href="" class="text-reset">
+                <i class="fab fa-twitter"></i>
+                <img style="width:30px;height:30px;margin-right:12px;" src="resources/twitter.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+                <i class="fab fa-instagram"></i>
+                <img style="width:24px;height:24px;margin-right:10px;" src="resources/instagram.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+                <i class="fab fa-linkedin"></i>
+                <img style="width:40px;height:40px;margin-right:10px;" src="resources/linkedin.png" alt="College_Graduation">
+            </a>
+            <a href="" class="text-reset">
+              <i class="fab fa-github"></i>
+              <img style="width:27px;height:27px;margin-right:10px;" src="resources/github.png" alt="College_Graduation">
+            </a>
+          </div>
+        </section>
+
+        <section class="">
+          <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                <h6 class="text-uppercase fw-bold">
+                  College Vichar
+                </h6>
+                <p>
+                  Find the perfect college for your career
+                </p>
+              </div>
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+      
+              <!-- Grid column -->
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold mb-4">
+                  Contact
+                </h6>
+                <p>
+                  info@example.com
+                </p>
+                <p>+ 01 234 567 88</p>
+              </div>
+            </div>
+            <!-- Grid row -->
+          </div>
+        </section>
+        <!-- Section: Links  -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2021 Copyright:
+          <a class="text-reset fw-bold" href="home.html">CollegeVichar.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <script>
+        function openNav() {
+        document.getElementById("mySidebar").style.width = "70%";
+        document.getElementById("phone_menu_button").style.visibility = "hidden";
+        //document.getElementById("main").style.marginLeft = "250px";
+        }
+        
+        function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("phone_menu_button").style.visibility = "visible";
+        // document.getElementById("main").style.marginLeft= "0";
+        }
+
+        document.getElementById("explore").onclick = function () {
+        location.href = "findcolleges.html";
+    };
+    $(document).ready(function() {
+
+    //window and animation items
+    var animation_elements = [$.find('.Wishlist_Content'),$.find('.About_Us_Content')];
+    var web_window = $(window);
+
+    //check to see if any animation containers are currently in view
+    function check_if_in_view() {
+    //get current window information
+    var window_height = web_window.height();
+    var window_top_position = web_window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    //iterate through elements to see if its in view
+    $.each(animation_elements, function() {
+
+        //get the element sinformation
+        var element = $(this);
+        var element_height = $(element).outerHeight();
+        var element_top_position = $(element).offset().top;
+        var element_bottom_position = (element_top_position + element_height);
+
+        //check to see if this current container is visible (its viewable if it exists between the viewable space of the viewport)
+        if ((element_bottom_position >= window_top_position) && (element_top_position*1.01 <= window_bottom_position)) {
+        element.addClass('in-view');
+        } else {
+        element.removeClass('in-view');
+        }
+    });
+
+    }
+
+    //on or scroll, detect elements in view
+    $(window).on('scroll resize', function() {
+        check_if_in_view()
+    })
+    //trigger our scroll event on initial load
+    $(window).trigger('scroll');
+
+    });
+    </script>
+</body>
+</html>
